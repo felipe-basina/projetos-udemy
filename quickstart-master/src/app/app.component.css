@@ -1,0 +1,20 @@
+.info {
+    background-color: #A1DBF0;
+    padding: 10px 24px;
+    margin: 8px;
+    color: black;
+}
+
+form {
+  margin: 24px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.acc > * {
+  margin: 4px;
+}
+
+.selected {
+  background-color: #45ee50;
+}

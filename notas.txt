@@ -1,0 +1,5 @@
+21:58 27/07/2017
+
+ - Iniciar o servidor:
+Em: E:\instalados\projetos\angular-js\quickstart-master
+executar o seguinte comando: npm start

@@ -1,0 +1,87 @@
+<div class="container">
+  <h1>Personal finance</h1>
+  <h2>Your accounts</h2>
+  <!-- Convenção: utilizar a notação "_" + nome propriedade para indicar
+    que a mesma é privada
+  -->
+
+  <accounts-list [accounts]="_accounts" (delete)="removeAcc($event)"></accounts-list>
+
+  <div class="row">
+    <form class="col-md-6 col-sm-9">
+      <h3>Add new account</h3>
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input class="form-control" id="title" type="text" name="title" value="" #title>
+      </div>
+
+    <div class="form-group">
+      <label for="desc">Description:</label>
+      <input class="form-control" id="desc" type="text" name="desc" value="" #desc>
+    </div>
+
+    <div class="form-group">
+      <label for="bal">Balance:</label>
+      <input class="form-control" id="bal" type="number" name="bal" value="0" #balance>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-success" (click)="createAcc(title, desc, balance)">Create</button>
+    </div>
+    </form>
+  </div>
+</div>
+<!--
+<h1>My first app with Angular 2</h1>
+<div>
+    <p>Hello, {{currentUser.username}}
+    <p *ngIf="!hideEmail">Your email is: <em>{{currentUser.email}}</em></p>
+    <button (click)="toggle()">Toggle(click)</button>
+</div>
+
+<ul>
+-->
+  <!-- Não funciona usar a notação #user para criação de variável -->
+  <!-- Deve-se utilizar então a palavra chave 'let' -->
+<!--
+  <li *ngFor="let user of users, let i=index">
+      ({{i + 1}}) {{user.username}} - <em>{{user.email}}</em>
+  </li>
+</ul>
+-->
+
+<!-- Versão inicial
+<div>
+    <p>Hello, {{currentUser.username}}
+    <p [hidden]='hideEmail'>Your email is: <em>{{currentUser.email}}</em></p>
+    <button (click)="toggle()">Toggle(click)</button>
+</div>
+
+<div>
+  <input type="text" #a>
+  <p>Value of input is: {{a.value}}</p>
+</div>
+
+<div>
+  <input type="text" #b (keyup)="0">
+  <p>Value of input is: {{b.value}}</p>
+</div>
+
+<div>
+  <h3>Change Email</h3>
+  <input type="text" name="name" #newMail>
+  <button (click)="changeMail(newMail.value)">Change</button>
+</div>
+
+<div>
+  <h3>Change Email</h3>
+  <input type="text" #newMail2 (keyup)="keyPress($event)">
+  <button (click)="changeMail(newMail2.value)">Change</button>
+</div>
+
+<div>
+  <h3>Change Email</h3>
+  <input type="text" #newMail3 (keyup.enter)="changeMail(newMail3.value)">
+  <button (click)="changeMail(newMail3.value)">Change</button>
+</div>
+-->
