@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+//import { BrowserModule } from '@angular/platform-browser';
 import { Account } from './account/account.model';
 import { AccountsList } from './account/accounts_list.component';
+import { AccountForm } from './account/account_form.component';
 
 // https://stackoverflow.com/questions/39428132/custom-elements-schema-added-to-ngmodule-schemas-still-showing-error
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [AccountsList],
+  declarations: [AccountsList, AccountForm],
 })
 
 @Component({
@@ -40,21 +41,35 @@ export class AppComponent  {
 
   private _nextId = 3;
 
-  private createAcc(titleE1: any, descE1: any, balE1: any) {
+  private createAccError:string = "";
+  private accLimit:number = 3;
+
+  private createAcc(newAccount:Account) {
+      this.createAccError = "";
       /*this._accounts.push(new Account(this._nextId, titleE1.value, descE1.value,
       balE1.value))
       this._selected.push(false)
       this._nextId++*/
 
-      titleE1.value = ""
+      if (this._accounts.length < this.accLimit) {
+        newAccount.id = this._nextId++;
+        this._accounts.push(newAccount);
+        this.form.resetForm();
+      } else {
+          this.createAccError = "Only " + this.accLimit + " account(s) allowed.";
+      }
+
+      /*titleE1.value = ""
       descE1.value = ""
-      balE1.value = 0
+      balE1.value = 0*/
   }
 
   private removeAcc(index:number) {
     this._accounts.splice(index, 1)
     //this._selected.splice(index, 1)
   }
+
+  @ViewChild(AccountForm) form:AccountForm;
 
   /*** Utilizado no início do tutorial para testes ***/
   /*private currentUser:User = { username: "Test", email: "test@test.com" }
