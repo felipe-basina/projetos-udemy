@@ -4,7 +4,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Account } from './account/account.model';
 import { AccountsList } from './account/accounts_list.component';
 import { AccountForm } from './account/account_form.component';
-import { AccountService } from './account/account.services';
+import { AccountService, ACCOUNT_SERVICE_PROVIDERS } from './account/account.services';
+import { LoggerService } from './util/logger.service';
 
 // https://stackoverflow.com/questions/39428132/custom-elements-schema-added-to-ngmodule-schemas-still-showing-error
 @NgModule({
@@ -17,7 +18,8 @@ import { AccountService } from './account/account.services';
   templateUrl: 'app/app.component.html',
   styleUrls: ['app/app.component.css'],
   //styles: ['.blue-bg{background-color:blue;}']
-  providers: [AccountService]
+  //providers: [AccountService, LoggerService]
+  providers: [ACCOUNT_SERVICE_PROVIDERS]
 })
 
 /**
