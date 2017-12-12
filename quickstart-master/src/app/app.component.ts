@@ -33,7 +33,7 @@ import { LoggerService } from './util/logger.service';
 export class AppComponent  {
 
   // Convenção ao definir atributos/propriedades privados: iniciar com "_"
-  private _accounts:Array<Account>;
+  private _accounts:Array<Account> = [];
   /*private _accounts:Array<Account> = [
     {
       id: 1,
@@ -48,7 +48,9 @@ export class AppComponent  {
 
   constructor(accountService: AccountService) {
     this._accountService = accountService;
-    this._accounts = this._accountService.getAll();
+    //this._accounts = this._accountService.getAll();
+    var promise = this._accountService.getAll();
+    promise.then(accounts => this._accounts = accounts);
   }
 
   //private _nextId = 3;
@@ -56,28 +58,38 @@ export class AppComponent  {
   private createAccError:string = "";
   //private accLimit:number = 3;
 
+  // private createAcc(newAccount:Account) {
+  //     this._accountService.create(newAccount);
+  //     this.form.resetForm();
+  //
+  //     //this.createAccError = "";
+  //     /*this._accounts.push(new Account(this._nextId, titleE1.value, descE1.value,
+  //     balE1.value))
+  //     this._selected.push(false)
+  //     this._nextId++*/
+  //
+  //     /*if (this._accounts.length < this.accLimit) {
+  //       newAccount.id = this._nextId++;
+  //       this._accounts.push(newAccount);
+  //       this.form.resetForm();
+  //     } else {
+  //         this.createAccError = "Only " + this.accLimit + " account(s) allowed.";
+  //     }*/
+  //
+  //     /*titleE1.value = ""
+  //     descE1.value = ""
+  //     balE1.value = 0*/
+  // }
   private createAcc(newAccount:Account) {
-      this._accountService.create(newAccount);
-      this.form.resetForm();
-
-      //this.createAccError = "";
-      /*this._accounts.push(new Account(this._nextId, titleE1.value, descE1.value,
-      balE1.value))
-      this._selected.push(false)
-      this._nextId++*/
-
-      /*if (this._accounts.length < this.accLimit) {
-        newAccount.id = this._nextId++;
-        this._accounts.push(newAccount);
+    this._accountService.create(newAccount)
+      .then(account => {
+        console.log(account);
+        this.createAccError = "";
         this.form.resetForm();
-      } else {
-          this.createAccError = "Only " + this.accLimit + " account(s) allowed.";
-      }*/
-
-      /*titleE1.value = ""
-      descE1.value = ""
-      balE1.value = 0*/
+      })
+      .catch(err => this.createAccError = err);
   }
+
 
   private removeAcc(index:number) {
     this._accountService.remove(index);

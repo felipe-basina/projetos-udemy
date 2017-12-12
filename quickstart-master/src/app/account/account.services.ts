@@ -21,20 +21,47 @@ export class AccountService {
     balance: 322
   }];
 
-  public getAll():Array<Account> {
-    return this._accounts;
+  // public getAll():Array<Account> {
+  //   return this._accounts;
+  // }
+  public getAll():Promise<Array<Account>> {
+    return Promise.resolve(this._accounts);
   }
 
   private _nextId = 3;
+  private _accountLimit = 3;
 
+//   public create(newAccount:Account) {
+//     newAccount.id = this._nextId++;
+//
+//     if (this._logger) {
+//       this._logger.log('Account created: ' + newAccount.title);
+//     }
+//
+//     this._accounts.push(newAccount);
+//   }
+//
+//   public remove(index:number) {
+//     if (this._logger) {
+//       this._logger.log('Account deleted: ' + this._accounts[index].title);
+//     }
+//     this._accounts.splice(index, 1);
+//   }
+// }
   public create(newAccount:Account) {
-    newAccount.id = this._nextId++;
+    return new Promise((resolve, reject) => {
+      if (this._accounts.length >= this._accountLimit) {
+        return reject("Maximum accounts limit reached.");
+      }
 
-    if (this._logger) {
-      this._logger.log('Account created: ' + newAccount.title);
-    }
+      newAccount.id = this._nextId++;
+      if (this._logger) {
+        this._logger.log('Account created: ' + newAccount.title);
+      }
 
-    this._accounts.push(newAccount);
+      this._accounts.push(newAccount);
+      resolve(newAccount);
+    });
   }
 
   public remove(index:number) {
