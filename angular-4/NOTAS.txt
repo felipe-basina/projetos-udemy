@@ -1,0 +1,5 @@
+# Compilar durante o desenvolvimento (ao salvar o arquivo)
+tsc -w
+
+# Executar o arquivo
+node nome_arquivo.js
