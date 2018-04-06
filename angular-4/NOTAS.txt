@@ -6,3 +6,16 @@ tsc -w
 
 # Executar o arquivo
 node nome_arquivo.js
+
+# Criando o arquivo package.json
+(Comando deve ser executado no diretório raiz do projeto)
+(O argumento -f indica para definir valores padrões)
+npm init -f
+
+# Importando uma biblioteca js
+npm install --save lodash@4.14
+
+# Importando definição de tipos do lodash (para utilização pelo typescript)
+(Em produção será utilizado o javascript e não o typescript que será compilado para geração do javascript)
+(Dependência deverá ser utilizada apenas em desenvolvimento --save-dev)
+npm install --save-dev @types/lodash@4.14
