@@ -1,0 +1,3 @@
+# Iniciando o servidor
+ng server
+- A aplicação estará disponível em localhost:4200/
